@@ -12,10 +12,10 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TicketController : ControllerBase
+    public class TicketsController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public TicketController(IMediator mediator)
+        public TicketsController(IMediator mediator)
         {
             _mediator = mediator;
         }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Domain;
 using MediatR;
 using Persistence;
+using FluentValidation;
 
 namespace Application.Tickets
 {
@@ -18,6 +19,19 @@ namespace Application.Tickets
             public DateTime DateFirst { get; set; }
             public DateTime DateModified { get; set; }
             public DateTime DateDeadline { get; set; }
+        }
+
+        public class CommandValidator : AbstractValidator<Command>
+        {
+             public CommandValidator()
+            {
+                RuleFor(x => x.Title).NotEmpty();
+                RuleFor(x => x.Description).NotEmpty();
+                RuleFor(x => x.Category).NotEmpty();
+                RuleFor(x => x.DateFirst).NotEmpty();
+                RuleFor(x => x.DateModified).NotEmpty();
+                RuleFor(x => x.DateDeadline).NotEmpty();
+            }
         }
 
         public class Handler : IRequestHandler<Command>
