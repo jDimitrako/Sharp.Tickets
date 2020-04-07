@@ -1,6 +1,8 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using Domain;
 using MediatR;
 using Persistence;
@@ -25,6 +27,10 @@ namespace Application.Tickets
             public async Task<Ticket> Handle(Query request, CancellationToken cancellationToken)
             {
                 var ticket = await _context.Tickets.FindAsync(request.Id);
+
+                if (ticket == null)
+                    throw new RestException(HttpStatusCode.NotFound, new 
+                    {ticket = "Not Found"});
 
                 return ticket;
             }

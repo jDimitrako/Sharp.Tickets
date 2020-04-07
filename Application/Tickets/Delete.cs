@@ -1,6 +1,8 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using MediatR;
 using Persistence;
 
@@ -26,7 +28,7 @@ namespace Application.Tickets
                 var ticket = await _context.Tickets.FindAsync(request.Id);
 
                 if (ticket == null)
-                    throw new Exception("Could not find ticket");
+                    throw new RestException(HttpStatusCode.NotFound, new {ticket= "Not found"});
 
                 _context.Remove(ticket);
 

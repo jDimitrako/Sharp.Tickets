@@ -1,6 +1,8 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using FluentValidation;
 using MediatR;
 using Persistence;
@@ -20,9 +22,9 @@ namespace Application.Tickets
             public DateTime? DateDeadline { get; set; }
         }
 
-         public class CommandValidator : AbstractValidator<Command>
+        public class CommandValidator : AbstractValidator<Command>
         {
-             public CommandValidator()
+            public CommandValidator()
             {
                 RuleFor(x => x.Title).NotEmpty();
                 RuleFor(x => x.Description).NotEmpty();
@@ -46,11 +48,12 @@ namespace Application.Tickets
                 var ticket = await _context.Tickets.FindAsync(request.Id);
 
                 if (ticket == null)
-                    throw new Exception("Could not find ticket");
+                    throw new RestException(HttpStatusCode.NotFound, new
+                    { ticket = "Not Found" });
 
                 ticket.Title = request.Title ?? ticket.Title;
                 ticket.Description = request.Description ?? ticket.Description;
-                ticket.Category = request.Category ?? ticket.Category; 
+                ticket.Category = request.Category ?? ticket.Category;
                 ticket.DateFirst = request.DateFirst ?? ticket.DateFirst;
                 ticket.DateModified = request.DateModified ?? ticket.DateModified;
                 ticket.DateDeadline = request.DateDeadline ?? ticket.DateDeadline;
