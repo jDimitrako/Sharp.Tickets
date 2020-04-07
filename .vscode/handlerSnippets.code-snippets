@@ -20,6 +20,19 @@
 		],
 		"description": "Query Handler"
 	  },
+	  "CsClass": {
+		"prefix": "csClass",
+		"body": [
+		  "namespace ",
+		  "{",
+		  "   public class ",
+		  "    {",
+		  "",
+		  "    }",
+		  "}"
+		],
+		"description": "CsClass"
+	  },
 	  "Command Handler": {
 		"prefix": "chandler",
 		"body": [
