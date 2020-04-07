@@ -6,6 +6,7 @@ using Apllication.Tickets;
 using Application.Tickets;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -19,6 +20,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Ticket>> Details(Guid id)
         {
             return await Mediator.Send(new Details.Query { Id = id });
