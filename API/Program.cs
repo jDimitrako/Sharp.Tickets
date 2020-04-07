@@ -13,7 +13,7 @@ namespace API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async System.Threading.Tasks.Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 
@@ -22,9 +22,10 @@ namespace API
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<DataContext>();
-                    context.Database.Migrate();
-                    Seed.SeedData(context);
+                   var context = services.GetRequiredService<DataContext>(); 
+                   var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                   context.Database.Migrate();
+                   Seed.SeedData(context, userManager).Wait();
                 }
                 catch (Exception ex)
                 {
