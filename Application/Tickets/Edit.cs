@@ -17,8 +17,6 @@ namespace Application.Tickets
             public string Title { get; set; }
             public string Description { get; set; }
             public string Category { get; set; }
-            public DateTime? DateFirst { get; set; }
-            public DateTime? DateModified { get; set; }
             public DateTime? DateDeadline { get; set; }
         }
 
@@ -29,8 +27,6 @@ namespace Application.Tickets
                 RuleFor(x => x.Title).NotEmpty();
                 RuleFor(x => x.Description).NotEmpty();
                 RuleFor(x => x.Category).NotEmpty();
-                RuleFor(x => x.DateFirst).NotEmpty();
-                RuleFor(x => x.DateModified).NotEmpty();
                 RuleFor(x => x.DateDeadline).NotEmpty();
             }
         }
@@ -54,8 +50,7 @@ namespace Application.Tickets
                 ticket.Title = request.Title ?? ticket.Title;
                 ticket.Description = request.Description ?? ticket.Description;
                 ticket.Category = request.Category ?? ticket.Category;
-                ticket.DateFirst = request.DateFirst ?? ticket.DateFirst;
-                ticket.DateModified = request.DateModified ?? ticket.DateModified;
+                ticket.DateModified = DateTime.Now;
                 ticket.DateDeadline = request.DateDeadline ?? ticket.DateDeadline;
 
                 var success = await _context.SaveChangesAsync() > 0;

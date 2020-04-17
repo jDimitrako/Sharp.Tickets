@@ -16,21 +16,15 @@ namespace Application.Tickets
             public string Title { get; set; }
             public string Description { get; set; }
             public string Category { get; set; }
-            public DateTime DateFirst { get; set; }
-            public DateTime DateModified { get; set; }
-            public DateTime DateDeadline { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
         {
-             public CommandValidator()
+            public CommandValidator()
             {
                 RuleFor(x => x.Title).NotEmpty();
                 RuleFor(x => x.Description).NotEmpty();
                 RuleFor(x => x.Category).NotEmpty();
-                RuleFor(x => x.DateFirst).NotEmpty();
-                RuleFor(x => x.DateModified).NotEmpty();
-                RuleFor(x => x.DateDeadline).NotEmpty();
             }
         }
 
@@ -44,15 +38,15 @@ namespace Application.Tickets
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var ticket = new Ticket 
+                var ticket = new Ticket
                 {
                     Id = request.Id,
                     Title = request.Title,
                     Description = request.Description,
                     Category = request.Category,
-                    DateFirst = request.DateFirst,
-                    DateModified = request.DateModified,
-                    DateDeadline = request.DateDeadline
+                    DateFirst = DateTime.Now.Date,
+                    DateModified = DateTime.Now.Date,
+                    DateDeadline = DateTime.Now.AddDays(3)
                 };
 
                 _context.Add(ticket);
