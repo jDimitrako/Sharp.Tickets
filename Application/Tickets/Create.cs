@@ -5,6 +5,8 @@ using Domain;
 using MediatR;
 using Persistence;
 using FluentValidation;
+using Application.interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Tickets
 {
@@ -31,8 +33,10 @@ namespace Application.Tickets
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IUserAccessor _userAccessor;
+            public Handler(DataContext context, IUserAccessor userAccessor)
             {
+                _userAccessor = userAccessor;
                 _context = context;
             }
 
@@ -50,6 +54,19 @@ namespace Application.Tickets
                 };
 
                 _context.Add(ticket);
+
+                var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentUsername());
+
+                var attendee = new UserTicket
+                {
+                    AppUser = user,
+                    Ticket = ticket,
+                    IsHost = true,
+                    DateJoined = DateTime.Now
+                };
+
+                _context.UserTickets.Add(attendee);
+
                 var success = await _context.SaveChangesAsync() > 0;
 
                 if (success) return Unit.Value;
