@@ -3,6 +3,8 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Errors;
+using Application.Tickets.Dtos;
+using AutoMapper;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,20 +14,22 @@ namespace Application.Tickets
 {
     public class Details
     {
-        public class Query : IRequest<Ticket>
+        public class Query : IRequest<TicketDto>
         {
             public Guid Id { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, Ticket>
+        public class Handler : IRequestHandler<Query, TicketDto>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IMapper _mapper;
+            public Handler(DataContext context, IMapper mapper)
             {
+                _mapper = mapper;
                 _context = context;
             }
 
-            public async Task<Ticket> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<TicketDto> Handle(Query request, CancellationToken cancellationToken)
             {
                 var ticket = await _context.Tickets
                     .Include(x => x.UserTickets)
@@ -36,7 +40,9 @@ namespace Application.Tickets
                     throw new RestException(HttpStatusCode.NotFound, new
                     { ticket = "Not Found" });
 
-                return ticket;
+                var ticketToReturn = _mapper.Map<Ticket, TicketDto>(ticket);
+
+                return ticketToReturn;
             }
         }
     }

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apllication.Tickets;
 using Application.Tickets;
+using Application.Tickets.Dtos;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -14,14 +15,14 @@ namespace API.Controllers
     public class TicketsController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<List<Ticket>>> List(CancellationToken ct)
+        public async Task<ActionResult<List<TicketDto>>> List(CancellationToken ct)
         {
             return await Mediator.Send(new List.Query(), ct);
         }
 
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<Ticket>> Details(Guid id)
+        public async Task<ActionResult<TicketDto>> Details(Guid id)
         {
             return await Mediator.Send(new Details.Query { Id = id });
         }
@@ -42,7 +43,7 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Unit>> Delete(Guid id)
         {
-            return await Mediator.Send(new Delete.Command{Id = id});
+            return await Mediator.Send(new Delete.Command { Id = id });
         }
     }
 }
