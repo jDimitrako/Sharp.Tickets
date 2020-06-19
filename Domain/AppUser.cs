@@ -8,6 +8,6 @@ namespace Domain
     public class AppUser : IdentityUser
     {
         public string DisplayName { get; set; }
-        public ICollection<UserTicket> UserTickets { get; set; }
+        public virtual ICollection<UserTicket> UserTickets { get; set; }
     }
 }

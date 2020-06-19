@@ -32,9 +32,7 @@ namespace Application.Tickets
             public async Task<TicketDto> Handle(Query request, CancellationToken cancellationToken)
             {
                 var ticket = await _context.Tickets
-                    .Include(x => x.UserTickets)
-                    .ThenInclude(x => x.AppUser)
-                    .SingleOrDefaultAsync(x => x.Id == request.Id);
+                    .FindAsync(request.Id);
 
                 if (ticket == null)
                     throw new RestException(HttpStatusCode.NotFound, new
