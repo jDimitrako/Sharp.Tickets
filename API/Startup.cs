@@ -65,6 +65,16 @@ namespace API
             identityBuilder.AddEntityFrameworkStores<DataContext>();
             identityBuilder.AddSignInManager<SignInManager<AppUser>>();
 
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("IsTicketHost", policy =>
+                {
+                    policy.Requirements.Add(new IsHostRequirment());
+                });
+            });
+
+            services.AddTransient<IAuthorizationHandler, IsHostRequirmentHandler>();
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
