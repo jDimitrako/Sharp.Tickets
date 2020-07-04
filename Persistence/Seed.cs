@@ -9,7 +9,8 @@ namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
+        public static async Task SeedData(DataContext context,
+            UserManager<AppUser> userManager)
         {
             if (!userManager.Users.Any())
             {
@@ -17,23 +18,27 @@ namespace Persistence
                 {
                     new AppUser
                     {
+                        Id = "a",
                         DisplayName = "Bob",
                         UserName = "bob",
                         Email = "bob@test.com"
                     },
                     new AppUser
                     {
-                        DisplayName = "James",
-                        UserName = "james",
-                        Email = "James@test.com"
+                        Id = "b",
+                        DisplayName = "Jane",
+                        UserName = "jane",
+                        Email = "jane@test.com"
                     },
                     new AppUser
                     {
-                        DisplayName = "Vaso",
-                        UserName = "vaso",
-                        Email = "vaso@test.com"
-                    }
+                        Id = "c",
+                        DisplayName = "Tom",
+                        UserName = "tom",
+                        Email = "tom@test.com"
+                    },
                 };
+
                 foreach (var user in users)
                 {
                     await userManager.CreateAsync(user, "Pa$$w0rd");
@@ -42,100 +47,240 @@ namespace Persistence
 
             if (!context.Tickets.Any())
             {
-                var activities = new List<Ticket>
+                var tickets = new List<Ticket>
                 {
                     new Ticket
                     {
                         Title = "Past Ticket 1",
-                        Description = "Ticket 2 months ago",
-                        Category = "culture",
-                        
+                        DateFirst = DateTime.Now.AddMonths(-2),
+                        DateModified = DateTime.Now.AddMonths(-1),
+                        DateDeadline = DateTime.Now.AddMonths(2),
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
+                        Category = "Sales",
+                        UserTickets = new List<UserTicket>
+                        {
+                            new UserTicket
+                            {
+                                AppUserId = "a",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(-2)
+                            }
+                        }
                     },
                     new Ticket
                     {
                         Title = "Past Ticket 2",
-                        Description = "Ticket 1 month ago",
-                        Category = "culture",
-                        DateFirst = DateTime.Now.AddMonths(-2),
-                        DateModified = DateTime.Now.AddMonths(-2),
-                        DateDeadline = DateTime.Now.AddMonths(-2)
+                         DateFirst = DateTime.Now.AddMonths(-2),
+                        DateModified = DateTime.Now.AddMonths(-1),
+                        DateDeadline = DateTime.Now.AddMonths(2),
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
+                        Category = "Back Office",
+                        UserTickets = new List<UserTicket>
+                        {
+                            new UserTicket
+                            {
+                                AppUserId = "b",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(-1)
+                            },
+                            new UserTicket
+                            {
+                                AppUserId = "a",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(-1)
+                            },
+                        }
                     },
                     new Ticket
                     {
                         Title = "Future Ticket 1",
-                        Description = "Ticket 1 month in future",
-                        Category = "culture",
-                        DateFirst = DateTime.Now.AddMonths(-2),
-                        DateModified = DateTime.Now.AddMonths(-2),
-                        DateDeadline = DateTime.Now.AddMonths(-2)
+                         DateFirst = DateTime.Now.AddMonths(-2),
+                        DateModified = DateTime.Now.AddMonths(-1),
+                        DateDeadline = DateTime.Now.AddMonths(2),
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
+                        Category = "Back Office",
+                        UserTickets = new List<UserTicket>
+                        {
+                            new UserTicket
+                            {
+                                AppUserId = "b",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(1)
+                            },
+                            new UserTicket
+                            {
+                                AppUserId = "a",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(1)
+                            },
+                        }
                     },
                     new Ticket
                     {
                         Title = "Future Ticket 2",
-                        Description = "Ticket 2 months in future",
-                        Category = "music",
-                        DateFirst = DateTime.Now.AddMonths(-2),
-                        DateModified = DateTime.Now.AddMonths(-2),
-                        DateDeadline = DateTime.Now.AddMonths(-2)
+                         DateFirst = DateTime.Now.AddMonths(-2),
+                        DateModified = DateTime.Now.AddMonths(-1),
+                        DateDeadline = DateTime.Now.AddMonths(2),
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
+                        Category = "Sales",
+                        UserTickets = new List<UserTicket>
+                        {
+                            new UserTicket
+                            {
+                                AppUserId = "c",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(2)
+                            },
+                            new UserTicket
+                            {
+                                AppUserId = "a",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(2)
+                            },
+                        }
                     },
                     new Ticket
                     {
                         Title = "Future Ticket 3",
-                        Description = "Ticket 3 months in future",
-                        Category = "drinks",
-                        DateFirst = DateTime.Now.AddMonths(-2),
-                        DateModified = DateTime.Now.AddMonths(-2),
-                        DateDeadline = DateTime.Now.AddMonths(-2)
+                         DateFirst = DateTime.Now.AddMonths(-2),
+                        DateModified = DateTime.Now.AddMonths(-1),
+                        DateDeadline = DateTime.Now.AddMonths(2),
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
+                        Category = "Quality Department",
+                        UserTickets = new List<UserTicket>
+                        {
+                            new UserTicket
+                            {
+                                AppUserId = "b",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(3)
+                            },
+                            new UserTicket
+                            {
+                                AppUserId = "c",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(3)
+                            },
+                        }
                     },
                     new Ticket
                     {
                         Title = "Future Ticket 4",
-                        Description = "Ticket 4 months in future",
-                        Category = "drinks",
-                        DateFirst = DateTime.Now.AddMonths(-2),
-                        DateModified = DateTime.Now.AddMonths(-2),
-                        DateDeadline = DateTime.Now.AddMonths(-2)
+                         DateFirst = DateTime.Now.AddMonths(-2),
+                        DateModified = DateTime.Now.AddMonths(-1),
+                        DateDeadline = DateTime.Now.AddMonths(2),
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
+                        Category = "Quality Department",
+                        UserTickets = new List<UserTicket>
+                        {
+                            new UserTicket
+                            {
+                                AppUserId = "a",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(4)
+                            }
+                        }
                     },
                     new Ticket
                     {
                         Title = "Future Ticket 5",
-                        Description = "Ticket 5 months in future",
-                        Category = "drinks",
-                        DateFirst = DateTime.Now.AddMonths(-2),
-                        DateModified = DateTime.Now.AddMonths(-2),
-                        DateDeadline = DateTime.Now.AddMonths(-2)
+                         DateFirst = DateTime.Now.AddMonths(-2),
+                        DateModified = DateTime.Now.AddMonths(-1),
+                        DateDeadline = DateTime.Now.AddMonths(2),
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
+                        Category = "Quality Department",
+                        UserTickets = new List<UserTicket>
+                        {
+                            new UserTicket
+                            {
+                                AppUserId = "c",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(5)
+                            },
+                            new UserTicket
+                            {
+                                AppUserId = "b",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(5)
+                            },
+                        }
                     },
                     new Ticket
                     {
                         Title = "Future Ticket 6",
-                        Description = "Ticket 6 months in future",
-                        Category = "music",
-                        DateFirst = DateTime.Now.AddMonths(-2),
-                        DateModified = DateTime.Now.AddMonths(-2),
-                        DateDeadline = DateTime.Now.AddMonths(-2)
+                         DateFirst = DateTime.Now.AddMonths(-2),
+                        DateModified = DateTime.Now.AddMonths(-1),
+                        DateDeadline = DateTime.Now.AddMonths(2),
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
+                        Category = "Quality Department",
+                        UserTickets = new List<UserTicket>
+                        {
+                            new UserTicket
+                            {
+                                AppUserId = "a",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(6)
+                            },
+                            new UserTicket
+                            {
+                                AppUserId = "b",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(6)
+                            },
+                        }
                     },
                     new Ticket
                     {
                         Title = "Future Ticket 7",
-                        Description = "Ticket 2 months ago",
-                        Category = "travel",
-                        DateFirst = DateTime.Now.AddMonths(-2),
-                        DateModified = DateTime.Now.AddMonths(-2),
-                        DateDeadline = DateTime.Now.AddMonths(-2)
+                         DateFirst = DateTime.Now.AddMonths(-2),
+                        DateModified = DateTime.Now.AddMonths(-1),
+                        DateDeadline = DateTime.Now.AddMonths(2),
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
+                        Category = "Sales",
+                        UserTickets = new List<UserTicket>
+                        {
+                            new UserTicket
+                            {
+                                AppUserId = "a",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(7)
+                            },
+                            new UserTicket
+                            {
+                                AppUserId = "c",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(7)
+                            },
+                        }
                     },
                     new Ticket
                     {
                         Title = "Future Ticket 8",
-                        Description = "Ticket 8 months in future",
-                        Category = "film",
-                        DateFirst = DateTime.Now.AddMonths(-2),
-                        DateModified = DateTime.Now.AddMonths(-2),
-                        DateDeadline = DateTime.Now.AddMonths(-2)
+                         DateFirst = DateTime.Now.AddMonths(-2),
+                        DateModified = DateTime.Now.AddMonths(-1),
+                        DateDeadline = DateTime.Now.AddMonths(2),
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
+                        Category = "Quality Department",
+                        UserTickets = new List<UserTicket>
+                        {
+                            new UserTicket
+                            {
+                                AppUserId = "b",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(8)
+                            },
+                            new UserTicket
+                            {
+                                AppUserId = "a",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(8)
+                            },
+                        }
                     }
                 };
 
-                context.Tickets.AddRange(activities);
-                context.SaveChanges();
+                await context.Tickets.AddRangeAsync(tickets);
+                await context.SaveChangesAsync();
             }
         }
     }
