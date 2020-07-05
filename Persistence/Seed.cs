@@ -52,8 +52,8 @@ namespace Persistence
                     new Ticket
                     {
                         Title = "Past Ticket 1",
-                        DateFirst = DateTime.Now.AddMonths(-2),
-                        DateModified = DateTime.Now.AddMonths(-1),
+                        DateFirst = DateTime.Now.AddMonths(-3),
+                        DateModified = DateTime.Now.AddMonths(-2),
                         DateDeadline = DateTime.Now.AddMonths(2),
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
                         Category = "Sales",
@@ -70,8 +70,8 @@ namespace Persistence
                     new Ticket
                     {
                         Title = "Past Ticket 2",
-                         DateFirst = DateTime.Now.AddMonths(-2),
-                        DateModified = DateTime.Now.AddMonths(-1),
+                         DateFirst = DateTime.Now.AddMonths(-5),
+                        DateModified = DateTime.Now.AddMonths(-3),
                         DateDeadline = DateTime.Now.AddMonths(2),
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
                         Category = "Back Office",
@@ -94,8 +94,8 @@ namespace Persistence
                     new Ticket
                     {
                         Title = "Future Ticket 1",
-                         DateFirst = DateTime.Now.AddMonths(-2),
-                        DateModified = DateTime.Now.AddMonths(-1),
+                         DateFirst = DateTime.Now.AddMonths(-10),
+                        DateModified = DateTime.Now.AddMonths(-6),
                         DateDeadline = DateTime.Now.AddMonths(2),
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
                         Category = "Back Office",
@@ -142,8 +142,8 @@ namespace Persistence
                     new Ticket
                     {
                         Title = "Future Ticket 3",
-                         DateFirst = DateTime.Now.AddMonths(-2),
-                        DateModified = DateTime.Now.AddMonths(-1),
+                         DateFirst = DateTime.Now.AddMonths(-20),
+                        DateModified = DateTime.Now.AddMonths(-11),
                         DateDeadline = DateTime.Now.AddMonths(2),
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
                         Category = "Quality Department",
@@ -166,7 +166,7 @@ namespace Persistence
                     new Ticket
                     {
                         Title = "Future Ticket 4",
-                         DateFirst = DateTime.Now.AddMonths(-2),
+                         DateFirst = DateTime.Now.AddMonths(-4),
                         DateModified = DateTime.Now.AddMonths(-1),
                         DateDeadline = DateTime.Now.AddMonths(2),
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
@@ -184,7 +184,7 @@ namespace Persistence
                     new Ticket
                     {
                         Title = "Future Ticket 5",
-                         DateFirst = DateTime.Now.AddMonths(-2),
+                         DateFirst = DateTime.Now.AddMonths(-5),
                         DateModified = DateTime.Now.AddMonths(-1),
                         DateDeadline = DateTime.Now.AddMonths(2),
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
@@ -208,7 +208,7 @@ namespace Persistence
                     new Ticket
                     {
                         Title = "Future Ticket 6",
-                         DateFirst = DateTime.Now.AddMonths(-2),
+                         DateFirst = DateTime.Now.AddMonths(-6),
                         DateModified = DateTime.Now.AddMonths(-1),
                         DateDeadline = DateTime.Now.AddMonths(2),
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
@@ -232,7 +232,7 @@ namespace Persistence
                     new Ticket
                     {
                         Title = "Future Ticket 7",
-                         DateFirst = DateTime.Now.AddMonths(-2),
+                         DateFirst = DateTime.Now.AddMonths(-1),
                         DateModified = DateTime.Now.AddMonths(-1),
                         DateDeadline = DateTime.Now.AddMonths(2),
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
@@ -256,7 +256,7 @@ namespace Persistence
                     new Ticket
                     {
                         Title = "Future Ticket 8",
-                         DateFirst = DateTime.Now.AddMonths(-2),
+                         DateFirst = DateTime.Now.AddMonths(-5),
                         DateModified = DateTime.Now.AddMonths(-1),
                         DateDeadline = DateTime.Now.AddMonths(2),
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ultricies orci. Aliquam cursus nulla lectus, id suscipit justo fringilla sed. Donec et aliquet sapien. Nunc et eleifend sem, sed dapibus lectus. Curabitur consectetur augue urna, et mattis felis congue in. Nullam non nisi lacus. Mauris id accumsan est. Mauris accumsan pulvinar mi non vulputate. Aliquam tincidunt tempor luctus. Quisque varius tellus quis augue sollicitudin hendrerit. Aliquam porta nibh nunc, ut volutpat tellus lacinia elementum. Pellentesque quis quam vel elit sollicitudin sodales. ",
