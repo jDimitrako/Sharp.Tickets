@@ -73,12 +73,12 @@ namespace Application.User
 
                 var result = await _userManager.CreateAsync(user, request.Password);
 
-                if (result.Succeeded) return new User 
+                if (result.Succeeded) return new User
                 {
                     DisplayName = user.DisplayName,
                     Token = _jwtGenerator.CreateToken(user),
                     Username = user.UserName,
-                    Image = null
+                    Image = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
                 };
 
                 throw new Exception("Problem creating user");
