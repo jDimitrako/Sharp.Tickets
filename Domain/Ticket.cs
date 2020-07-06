@@ -13,5 +13,7 @@ namespace Domain
         public DateTime DateModified { get; set; }
         public DateTime DateDeadline { get; set; }
         public virtual ICollection<UserTicket> UserTickets { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+
     }
 }
