@@ -14,9 +14,9 @@ namespace API.Controllers
     public class TicketsController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<List<TicketDto>>> List(CancellationToken ct)
+        public async Task<ActionResult<List.TicketsEnvelope>> List(int? limit, int? offset)
         {
-            return await Mediator.Send(new List.Query(), ct);
+            return await Mediator.Send(new List.Query(limit, offset));
         }
 
         [HttpGet("{id}")]
@@ -25,7 +25,6 @@ namespace API.Controllers
         {
             return await Mediator.Send(new Details.Query { Id = id });
         }
-
         [HttpPost]
         public async Task<ActionResult<Unit>> Create(Create.Command command)
         {

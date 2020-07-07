@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Tickets.Dtos;
@@ -12,9 +13,24 @@ namespace Apllication.Tickets
 {
     public class List
     {
-        public class Query : IRequest<List<TicketDto>> { };
+        public class TicketsEnvelope
+        {
+            public List<TicketDto> Tickets { get; set; }
+            public int TicketCount { get; set; }
+        }
+        public class Query : IRequest<TicketsEnvelope>
+        {
+            public Query(int? limit, int? offset)
+            {
+                Limit = limit;
+                Offset = offset;
 
-        public class Handler : IRequestHandler<Query, List<TicketDto>>
+            }
+            public int? Limit { get; set; }
+            public int? Offset { get; set; }
+        };
+
+        public class Handler : IRequestHandler<Query, TicketsEnvelope>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -24,11 +40,19 @@ namespace Apllication.Tickets
                 _context = context;
             }
 
-            public async Task<List<TicketDto>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<TicketsEnvelope> Handle(Query request, CancellationToken cancellationToken)
             {
-                var tickets = await _context.Tickets.ToListAsync();
+                var queryable = _context.Tickets.AsQueryable();
 
-                return _mapper.Map<List<Ticket>, List<TicketDto>>(tickets);
+                var tickets = await queryable
+                    .Skip(request.Offset ?? 0)
+                    .Take(request.Limit ?? 3).ToListAsync();
+
+                return new TicketsEnvelope
+                {
+                    Tickets = _mapper.Map<List<Ticket>, List<TicketDto>>(tickets),
+                    TicketCount = queryable.Count()
+                };
             }
         }
     }
