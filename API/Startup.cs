@@ -5,6 +5,7 @@ using API.SignalR;
 using Apllication.Tickets;
 using Application.interfaces;
 using Application.Interfaces;
+using Application.Profiles;
 using Application.Tickets;
 using AutoMapper;
 using Domain;
@@ -109,6 +110,7 @@ namespace API
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+            services.AddScoped<IProfileReader, ProfileReader>();
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
             // services.AddAuthentication();
         }
