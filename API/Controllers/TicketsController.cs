@@ -14,9 +14,10 @@ namespace API.Controllers
     public class TicketsController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<List.TicketsEnvelope>> List(int? limit, int? offset)
+        public async Task<ActionResult<List.TicketsEnvelope>> List(int? limit, int? offset,
+            bool isGoing, bool isHost, DateTime? startDate)
         {
-            return await Mediator.Send(new List.Query(limit, offset));
+            return await Mediator.Send(new List.Query(limit, offset, isGoing, isHost, startDate));
         }
 
         [HttpGet("{id}")]
