@@ -71,7 +71,7 @@ export default class TicketStore {
 
   @action createHubConnection = (ticketId: string) => {
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl(process.env.REACT_APP_API_CHAT_URL!, {
+      .withUrl(process.env.REACT_APP_CHAT_URL!, {
         accessTokenFactory: () => this.rootStore.commonStore.token!,
       })
       .configureLogging(LogLevel.Information)

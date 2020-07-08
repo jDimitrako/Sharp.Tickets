@@ -41,6 +41,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "postbuild": "move build ../API/wwwroot",
     "test": "craco test",
     "eject": "craco eject"
   },
