@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Threading.Tasks;
 using API.Middleware;
@@ -49,8 +50,8 @@ namespace API
            {
                options.AddPolicy("CorsPolicy", policy =>
                {
-                   policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000").AllowCredentials();
-                   policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://127.0.0.1:4049").AllowCredentials();
+                   policy.AllowAnyHeader().AllowAnyMethod().WithExposedHeaders("WWW-Authenticate").WithOrigins("http://localhost:3000").AllowCredentials();
+                   policy.AllowAnyHeader().AllowAnyMethod().WithExposedHeaders("WWW-Authenticate").WithOrigins("http://127.0.0.1:11910").AllowCredentials();
                });
            });
             services.AddMediatR(typeof(List.Handler).Assembly);
@@ -90,7 +91,9 @@ namespace API
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = key,
                         ValidateAudience = false,
-                        ValidateIssuer = false
+                        ValidateIssuer = false,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero
                     };
                     opt.Events = new JwtBearerEvents
                     {
